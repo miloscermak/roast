@@ -1,5 +1,6 @@
 import streamlit as st
 from roast_wiki import get_wiki_content, generate_roast
+import os
 
 def is_wiki_url(url):
     return "wikipedia.org" in url
@@ -10,6 +11,10 @@ st.title("Wiki Roaster 🎭")
 st.write("Zadejte URL článku z Wikipedie a nechte si vygenerovat vtipný roast!")
 
 url = st.text_input("URL článku z Wikipedie")
+
+if not st.secrets.get("ANTHROPIC_API_KEY"):
+    st.error("⚠️ ANTHROPIC_API_KEY není nastaven!")
+    st.stop()
 
 if url:
     if not is_wiki_url(url):

@@ -1,0 +1,11 @@
+name: wiki-roaster
+region: fra
+services:
+  - name: web
+    github:
+      repo: vase-repo/wiki-roaster
+      branch: main
+    envs:
+      - key: ANTHROPIC_API_KEY
+        value: "vas-api-klic"
+        type: SECRET 
