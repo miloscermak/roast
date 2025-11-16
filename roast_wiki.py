@@ -67,6 +67,7 @@ Important guidelines:
 - Focus on the person's actions, decisions, career, or public persona rather than physical appearance
 - Use a tone that would be appropriate for a comedy roast - irreverent but not genuinely hateful
 - Make your observations pointed and memorable
+- Write your roast in Czech language
 
 Write your roast in a single paragraph or short series of paragraphs. The goal is to create an entertaining, satirical take on this person's life and achievements based on the factual information provided.
 """
