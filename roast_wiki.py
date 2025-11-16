@@ -81,8 +81,14 @@ Write your roast in a single paragraph or short series of paragraphs. The goal i
             "content": prompt
         }]
     )
-    
-    return message.content
+
+    # Extrahujeme čistý text z response
+    roast_text = message.content[0].text
+
+    # Odstraníme <roast> tagy, pokud jsou přítomné
+    roast_text = roast_text.replace('<roast>', '').replace('</roast>', '').strip()
+
+    return roast_text
 
 def main():
     url = input("Zadejte URL článku z Wikipedie: ")
