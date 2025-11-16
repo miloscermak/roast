@@ -8,15 +8,36 @@ import streamlit as st
 load_dotenv()
 
 def get_wiki_content(url):
-    response = requests.get(url)
+    # Přidáme user-agent, aby nás Wikipedie neblokovala
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+    }
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()
+
     soup = BeautifulSoup(response.content, 'html.parser')
-    
-    # Získáme hlavní obsah článku
+
+    # Najdeme hlavní obsah článku
     content = soup.find(id="mw-content-text")
-    paragraphs = content.find_all('p')
-    
-    # Spojíme první 3 odstavce pro kontext
-    text = ' '.join([p.get_text() for p in paragraphs[:3]])
+
+    if not content:
+        raise ValueError("Nepodařilo se najít obsah článku. Zkontrolujte, zda je URL platná.")
+
+    # Najdeme všechny odstavce v hlavním obsahu
+    content_div = content.find('div', class_='mw-parser-output')
+    if not content_div:
+        content_div = content
+
+    paragraphs = content_div.find_all('p')
+
+    # Vyfiltrujeme prázdné odstavce a vezmeme první smysluplné odstavce
+    meaningful_paragraphs = [p.get_text().strip() for p in paragraphs if len(p.get_text().strip()) > 50]
+
+    if not meaningful_paragraphs:
+        raise ValueError("Nepodařilo se najít žádný obsah v článku.")
+
+    # Spojíme první 5 odstavců pro lepší kontext
+    text = ' '.join(meaningful_paragraphs[:5])
     return text
 
 def generate_roast(text):
