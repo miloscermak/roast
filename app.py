@@ -33,4 +33,4 @@ if url:
                 st.error(f"Došlo k chybě: {str(e)}")
 
 st.write("---")
-st.markdown("Vytvořeno pomocí Claude 3 Sonnet API") 
+st.markdown("Vytvořeno pomocí Claude Sonnet 4.5 API") 
