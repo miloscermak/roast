@@ -74,7 +74,7 @@ Write your roast in a single paragraph or short series of paragraphs. The goal i
     
     message = client.messages.create(
         model="claude-sonnet-4-5-20250929",
-        max_tokens=300,
+        max_tokens=500,
         temperature=0.9,
         messages=[{
             "role": "user",
